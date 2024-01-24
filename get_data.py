@@ -10,16 +10,34 @@ response = requests.get(web)
 content = response.text
 soup = BeautifulSoup(content, 'lxml') # extract data
 
-table_body = soup.find('tbody') #Look for table
-all_rows_data = []
 
-if table_body:
-    all_rows = table_body.find_all('tr') 
+# Initialize a list to store all the tables' data
+all_tables_data = []
 
-    for row in all_rows:
-        cells = row.find_all('td')
-        row_data = [cell.get_text(strip=True) for cell in cells]
-        all_rows_data.append(row_data)
+# Find all divs that contain tables, identified by the class 'mb-5' (or another class if necessary)
+table_divs = soup.find_all('div', class_='mb-5')
 
-print(all_rows_data)
+# Iterate over each div to find tables within them
+for div in table_divs:
+    # Find the table within the div, assuming there is only one table per div
+    table = div.find('table')
+    
+    # Proceed if a table is found
+    if table:
+        # Find the body of the table
+        tbody = table.find('tbody')
+        
+        # Continue if the table body is found
+        if tbody:
+            # Find all rows in the table body
+            all_rows = tbody.find_all('tr')
+            
+            # Extract data from each row
+            for row in all_rows:
+                cells = row.find_all('td')
+                row_data = [cell.get_text(strip=True) for cell in cells]
+                all_tables_data.append(row_data)
+
+# Now 'all_tables_data' contains the data from all the tables
+print(all_tables_data)
 

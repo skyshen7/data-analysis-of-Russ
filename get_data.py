@@ -15,30 +15,18 @@ def get_stat(year):
     # Initialize a list to store all the tables' data
     all_tables_data = []
 
-    # Find all divs that contain tables, identified by the class 'mb-5' (or another class if necessary)
-    table_divs = soup.find_all('div', class_='mb-5')
+    # Find all divs that contain tables
+    tables = soup.find_all('div', class_='mb-5')
 
     # Iterate over each div to find tables within them
-    for div in table_divs:
-        # Find the table within the div, assuming there is only one table per div
-        table = div.find('table')
-    
-        # Proceed if a table is found
-        if table:
-            # Find the body of the table
-            tbody = table.find('tbody')
-        
-            # Continue if the table body is found
-            if tbody:
-                # Find all rows in the table body
-                all_rows = tbody.find_all('tr')
-
-                # Extract data from each row
-                for row in all_rows:
-                    cells = row.find_all('td')
-                    row_data = [cell.get_text(strip=True) for cell in cells]
-                    all_tables_data.append(row_data)
-
+    for table in tables:
+        tbody = table.find('tbody')                # assuming there is only one table per div
+        if tbody:                                  # Continue if the table body is found
+            all_rows = tbody.find_all('tr')                 # Find all rows in the table body
+            for row in all_rows:                            # Extract data from each row
+                cells = row.find_all('td')
+                row_data = [cell.get_text(strip=True) for cell in cells]
+                all_tables_data.append(row_data)
     print(all_tables_data)
 
-get_stat(2009)
+get_stat(2020)

@@ -5,6 +5,11 @@ import pandas as pd
 years = [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 
          2018, 2019, 2020, 2021, 2022, 2023]
 
+column_names = [
+    'Date', 'Team', 'Versus', 'Opponent', 'Score', 'Min', 'FGM', 'FGA', 'FG%', '3PM', '3PA', '3P%',
+    'FTM', 'FTA', 'FT%', 'OREB', 'DREB', 'REB', 'AST', 'STL', 'BLK', 'TOV', 'PF', 'PTS', '+/-'
+]
+
 def get_stat(year):
     web = f'https://www.statmuse.com/nba/player/russell-westbrook-3933/game-log?seasonYear={year}'
     response = requests.get(web)
@@ -27,6 +32,11 @@ def get_stat(year):
                 cells = row.find_all('td')
                 row_data = [cell.get_text(strip=True) for cell in cells]
                 all_tables_data.append(row_data)
-    print(all_tables_data)
+    return all_tables_data
 
-get_stat(2020)
+df = pd.DataFrame(get_stat(2022), columns=column_names)
+csv_file = f'russell_westbrook_stats_{2022}.csv'
+
+df.to_csv(csv_file, index=False)
+
+

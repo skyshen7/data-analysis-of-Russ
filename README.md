@@ -13,7 +13,7 @@ Project Organization
     │   ├── external       <- Data from third party sources.
     │   ├── interim        <- Intermediate data that has been transformed.
     │   ├── processed      <- The final, canonical data sets for modeling.
-    │   └── raw            <- The original, immutable data dump.
+    │   └── raw            <- The original, immutable data dump. (From: https://www.statmuse.com/nba/player/russell-westbrook-3933)
     │
     ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
     │

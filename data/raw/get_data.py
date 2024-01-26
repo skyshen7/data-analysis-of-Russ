@@ -30,7 +30,7 @@ def get_stat(year):
 
 
 years = [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 
-         2018, 2019, 2020, 2021, 2022, 2023]
+         2018, 2019, 2020, 2021, 2022, 2023, 2024]
 
 
 column_names = [
@@ -48,5 +48,5 @@ for year in years:
     all_years_stats = pd.concat([all_years_stats,year_df], ignore_index=True)
     
        
-all_years_stats.to_csv('russell_westbrook_stats_all_years.csv', index=False)
+all_years_stats.to_csv('raw.csv', index=False)
 
